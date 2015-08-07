@@ -1,11 +1,11 @@
 body {
   font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
   max-width: 600px;
+  background: lightblue;
   margin: 0 auto;
   padding-top: 72px;
   -webkit-font-smoothing: antialiased;
   font-size: 1.125em;
-  color: #333;
   line-height: 1.5em;
 }
 

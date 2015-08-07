@@ -29,19 +29,17 @@
   [ :div
    [:form
     [:div.form-group
-     [:label "Enter your bet here :)  "]
+     [:label "Enter how much money you would like to bet here" [:br]]
      [:input
       {:type :text
-       :id "my-id"
        :on-change #( do
                      (reset! current-bet (-> % .-target .-value))
                      (if (< ( int @current-bet) 0)
                        (js/alert "must be greater than 0")))}]
      [:br]
-     [:label "Enter a number here yolo"]
+     [:label "Enter a guess here (choose a number between 1 and 5)" [:br]]
      [:input
       {:type :text
-       :id "my-id"
        :on-change #( do
                      (reset! current-guess (-> % .-target .-value))
                      (js/console.log @current-guess)
@@ -61,6 +59,7 @@
 
 (defn about-page []
   [:div [:h2 "About betting_game"]
+   [:p "Contact me at t.williams.im@gmail.com"]
    [:div [:a {:href "#/"} "go to the home page"]]])
 
 (defn current-page []
