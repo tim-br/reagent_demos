@@ -10,6 +10,10 @@
 (def current-guess (atom 0))
 (def current-bet (atom 0))
 
+(def app-state
+  (reagent/atom {:items [{}]}))
+
+
 ;; -------------------------
 ;; Views
 
