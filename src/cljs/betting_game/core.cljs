@@ -1,6 +1,7 @@
 (ns betting-game.core
     (:require [reagent.core :as reagent :refer [atom]]
               [reagent.session :as session]
+              [betting-game.todo :as todo]
               [secretary.core :as secretary :include-macros true]
               [goog.events :as events]
               [goog.history.EventType :as EventType])
@@ -9,13 +10,6 @@
 (def total-money (atom 100))
 (def current-guess (atom 0))
 (def current-bet (atom 0))
-
-(def app-state
-  (reagent/atom {:items [{}]}))
-
-
-;; -------------------------
-;; Views
 
 (defn check-bet [bet-amount]
   (let [result (rand-int 5)]
@@ -55,16 +49,22 @@
       "place a bet"]]]])
 
 (defn home-page []
-  [:div [:h2 "Welcome to the betting game"]
-   [:div [:h4 "You have a total of " @total-money " dollars"]]
-   [bet-form]
-   #_(js/alert (check-bet 30))
+  [:div [:h2 "Welcome to the To-Do List"]
+   [todo/new-item-form]
+   [todo/display-all]
+   [:div [:a {:href "#/betting-game"} "go to the betting game"]]
    [:div [:a {:href "#/about"} "go to about page"]]])
 
 (defn about-page []
-  [:div [:h2 "About betting_game"]
+  [:div [:h2 "About"]
    [:p "Contact me at t.williams.im@gmail.com"]
    [:div [:a {:href "#/"} "go to the home page"]]])
+
+(defn betting-game []
+  [:div [:h2 "Welcome to the betting game"]
+   [:div [:h4 "You have a total of " @total-money " dollars"]]
+   [bet-form]
+   [:div [:a {:href "#/"} "go to home page"]]])
 
 (defn current-page []
   [:div [(session/get :current-page)]])
@@ -78,6 +78,9 @@
 
 (secretary/defroute "/about" []
   (session/put! :current-page #'about-page))
+
+(secretary/defroute "/betting-game" []
+  (session/put! :current-page #'betting-game))
 
 ;; -------------------------
 ;; History
